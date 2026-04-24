@@ -1,20 +1,85 @@
 'use client';
 
 import { useCartStore } from '@/store/cart-store';
-import { Trash2, Plus, Minus, ArrowLeft, ShoppingBag } from 'lucide-react';
+import { Trash2, Plus, Minus, ArrowLeft, ShoppingBag, ArrowRight, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, totalPrice } = useCartStore();
+  const { items, removeItem, updateQuantity, totalPrice, clearCart } = useCartStore();
   const [mounted, setMounted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    address: ''
+  });
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   if (!mounted) return null;
+
+  const processOrder = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const res = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items,
+          totalAmount: totalPrice(),
+          userEmail: formData.email,
+          customerName: formData.name,
+          customerPhone: formData.phone,
+          shippingAddress: formData.address
+        })
+      });
+
+      if (res.ok) {
+        setSuccess(true);
+        setIsCheckingOut(false);
+        clearCart();
+      } else {
+        alert("Failed to process order.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred during checkout.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCheckoutClick = () => {
+    setIsCheckingOut(true);
+  };
+  if (success) {
+    return (
+      <div className="container mx-auto px-6 py-20 text-center min-h-screen flex flex-col items-center justify-center">
+        <div className="w-24 h-24 bg-green-500/10 border border-green-500/30 rounded-full flex items-center justify-center mx-auto mb-8 text-green-400">
+          <CheckCircle2 size={48} />
+        </div>
+        <h1 className="text-5xl font-black text-white mb-4">Order Confirmed!</h1>
+        <p className="text-xl text-slate-400 mb-10 max-w-md mx-auto">
+          Thank you for choosing ShopEase. Your premium gear is being prepared for shipment.
+        </p>
+        <Link
+          href="/shop"
+          className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-premium text-white font-bold rounded-2xl hover:scale-105 transition-transform"
+        >
+          <span>Continue Shopping</span>
+          <ArrowRight size={20} />
+        </Link>
+      </div>
+    );
+  }
 
   if (items.length === 0) {
     return (
@@ -37,8 +102,88 @@ export default function CartPage() {
     );
   }
 
+  if (isCheckingOut) {
+    return (
+      <div className="container mx-auto px-6 py-12 pb-32 max-w-2xl">
+        <button 
+          onClick={() => setIsCheckingOut(false)}
+          className="flex items-center space-x-2 text-slate-400 hover:text-white mb-8 transition-colors"
+        >
+          <ArrowLeft size={20} />
+          <span>Back to Cart</span>
+        </button>
+
+        <h1 className="text-4xl font-black text-white mb-2">Shipping Details</h1>
+        <p className="text-slate-400 mb-8">Please enter your information to complete the order.</p>
+
+        <form onSubmit={processOrder} className="glass rounded-3xl p-8 space-y-6">
+          <div>
+            <label className="block text-sm font-bold text-slate-300 mb-2">Full Name</label>
+            <input 
+              required 
+              type="text" 
+              value={formData.name}
+              onChange={e => setFormData({...formData, name: e.target.value})}
+              className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary-500 transition-colors"
+              placeholder="John Doe"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-bold text-slate-300 mb-2">Email Address</label>
+            <input 
+              required 
+              type="email" 
+              value={formData.email}
+              onChange={e => setFormData({...formData, email: e.target.value})}
+              className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary-500 transition-colors"
+              placeholder="john@example.com"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-bold text-slate-300 mb-2">Phone Number</label>
+            <input 
+              required 
+              type="tel" 
+              value={formData.phone}
+              onChange={e => setFormData({...formData, phone: e.target.value})}
+              className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary-500 transition-colors"
+              placeholder="+1 (555) 123-4567"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-bold text-slate-300 mb-2">Delivery Address</label>
+            <textarea 
+              required 
+              rows={3}
+              value={formData.address}
+              onChange={e => setFormData({...formData, address: e.target.value})}
+              className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary-500 transition-colors resize-none"
+              placeholder="123 Premium Street, Tech City, TC 90210"
+            />
+          </div>
+
+          <div className="h-px bg-white/10 my-4" />
+
+          <div className="flex justify-between items-center mb-6">
+            <span className="text-xl font-bold text-white">Total Amount</span>
+            <span className="text-2xl font-black text-glow text-primary-400">${totalPrice().toFixed(2)}</span>
+          </div>
+
+          <button 
+            type="submit"
+            disabled={loading}
+            className="w-full py-4 bg-gradient-premium text-white font-bold rounded-2xl shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform flex items-center justify-center space-x-2 disabled:opacity-50 disabled:scale-100"
+          >
+            <span>{loading ? 'Processing Order...' : 'Complete Purchase'}</span>
+            {!loading && <CheckCircle2 size={20} />}
+          </button>
+        </form>
+      </div>
+    );
+  }
+
   return (
-    <div className="container mx-auto px-6 py-12">
+    <div className="container mx-auto px-6 py-12 pb-32">
       <h1 className="text-4xl font-black text-white mb-12 flex items-center space-x-4">
         <span>Shopping Cart</span>
         <span className="text-xl font-medium text-slate-500">({items.length} items)</span>
@@ -111,7 +256,11 @@ export default function CartPage() {
               </div>
             </div>
 
-            <button className="w-full py-4 bg-gradient-premium text-white font-bold rounded-2xl shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform flex items-center justify-center space-x-2">
+            <button 
+              onClick={handleCheckoutClick}
+              disabled={loading}
+              className="w-full py-4 bg-gradient-premium text-white font-bold rounded-2xl shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform flex items-center justify-center space-x-2 disabled:opacity-50 disabled:scale-100"
+            >
               <span>Checkout Now</span>
               <ArrowRight size={20} />
             </button>
@@ -126,12 +275,5 @@ export default function CartPage() {
         </div>
       </div>
     </div>
-  );
-}
-
-// Inline ArrowRight since it was missing from imports above but used in the component
-function ArrowRight({ size }: { size: number }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
   );
 }
