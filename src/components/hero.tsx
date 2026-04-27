@@ -93,7 +93,7 @@ export const Hero = () => {
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
                 <Image 
-                  src="https://images.unsplash.com/photo-1598550476439-6847785fce66?auto=format&fit=crop&q=80&w=800" 
+                  src="/image/gaming.jpg" 
                   alt="Premium Gaming Chair" 
                   fill 
                   className="object-cover"

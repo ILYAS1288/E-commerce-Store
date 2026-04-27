@@ -56,7 +56,7 @@ const products = [
     name: 'AeroStream Gaming Chair',
     description: 'Memory foam padding with 4D armrests and premium breathable mesh fabric.',
     price: 499.99,
-    image: 'https://images.unsplash.com/photo-1598550476439-6847785fce66?auto=format&fit=crop&q=80&w=800',
+   image: "/image/gaming.jpg",
     category: 'Furniture',
     rating: 4.5,
     numReviews: 67,

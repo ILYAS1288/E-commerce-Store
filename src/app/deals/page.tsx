@@ -34,7 +34,7 @@ export default function DealsPage() {
       originalPrice: 499.99,
       salePrice: 389.99,
       discount: "22% OFF",
-      image: "https://images.unsplash.com/photo-1598550476439-6847785fce66?auto=format&fit=crop&q=80&w=800",
+      image: "/image/gaming.jpg",
       endsIn: "08:15:30",
       stock: "Only 3 Left",
       hot: true
