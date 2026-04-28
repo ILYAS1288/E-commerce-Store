@@ -6,10 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed-users": "tsx scripts/seed-users.ts"
   },
   "dependencies": {
     "@prisma/client": "^7.8.0",
+    "bcryptjs": "^3.0.3",
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.11.0",
     "mongodb": "^7.2.0",

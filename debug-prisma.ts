@@ -10,8 +10,8 @@ async function test() {
     console.log('Connected!');
     const products = await prisma.product.findMany();
     console.log('Products found:', products.length);
-  } catch (error) {
-    console.error('Error with no args:', error.message);
+  } catch (error: any) {
+    console.error('Error with no args:', error?.message ?? error);
   }
 }
 

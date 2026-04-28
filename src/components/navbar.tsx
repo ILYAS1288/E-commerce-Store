@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { ShoppingCart, Search, Menu, X } from 'lucide-react';
+import { ShoppingCart, Search, Menu } from 'lucide-react';
+import { useAuth } from '@/components/auth-provider';
 import { useCartStore } from '@/store/cart-store';
 import { useState, useEffect } from 'react';
 
@@ -9,6 +10,7 @@ export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const totalItems = useCartStore((state) => state.totalItems());
   const [mounted, setMounted] = useState(false);
+  const { auth, logout } = useAuth();
 
   useEffect(() => {
     setMounted(true);
@@ -40,6 +42,14 @@ export const Navbar = () => {
           <Link href="/shop" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Shop</Link>
           <Link href="/deals" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Deals</Link>
           <Link href="/about" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">About</Link>
+          {auth?.role === 'admin' ? (
+            <Link href="/admin" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Admin</Link>
+          ) : null}
+          {auth ? (
+            <button onClick={logout} className="text-sm font-medium text-white bg-accent px-4 py-2 rounded-full hover:bg-accent/90 transition">Logout</button>
+          ) : (
+            <Link href="/login" className="text-sm font-medium text-white bg-primary-500 px-4 py-2 rounded-full hover:bg-primary-400 transition">Login</Link>
+          )} 
         </div>
 
         <div className="flex items-center space-x-5">
