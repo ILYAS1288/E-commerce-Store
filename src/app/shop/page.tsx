@@ -9,6 +9,7 @@ export default function ShopPage() {
   const [sort, setSort] = useState("Sort: Featured");
   return (
     <div className="relative min-h-screen pb-20">
+
       {/* Intense Background Glows */}
       <div className="absolute top-[5%] left-[10%] w-[500px] h-[500px] bg-primary-600/20 rounded-full blur-[150px] pointer-events-none mix-blend-screen" />
       <div className="absolute top-[20%] right-[5%] w-[400px] h-[400px] bg-secondary-600/20 rounded-full blur-[150px] pointer-events-none mix-blend-screen" />
@@ -29,13 +30,13 @@ export default function ShopPage() {
                 Refine your setup with our hand-picked selection of top-tier gear. Tools crafted for ultimate performance.
               </p>
             </div>
-            
+
             <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
               <div className="relative w-full sm:w-auto group">
                 <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                  <Filter  size={16} className="text-slate-400 group-hover:text-primary-400 transition-colors" />
+                  <Filter size={16} className="text-slate-400 group-hover:text-primary-400 transition-colors" />
                 </div>
-                <select 
+                <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                   className="w-full sm:w-auto appearance-none bg-white/5 border border-white/10 hover:border-primary-500/50 rounded-2xl pl-12 pr-10 py-3 text-white font-medium focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all cursor-pointer backdrop-blur-md"
@@ -52,7 +53,7 @@ export default function ShopPage() {
                 <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
                   <SlidersHorizontal size={16} className="text-slate-400 group-hover:text-secondary-400 transition-colors" />
                 </div>
-                <select 
+                <select
                   value={sort}
                   onChange={(e) => setSort(e.target.value)}
                   className="w-full sm:w-auto appearance-none bg-white/5 border border-white/10 hover:border-secondary-500/50 rounded-2xl pl-12 pr-10 py-3 text-white font-medium focus:outline-none focus:ring-2 focus:ring-secondary-500/50 transition-all cursor-pointer backdrop-blur-md"

@@ -23,6 +23,7 @@ export default function CartPage() {
     setMounted(true);
   }, []);
 
+
   if (!mounted) return null;
 
   const processOrder = async (e: React.FormEvent) => {
@@ -105,7 +106,7 @@ export default function CartPage() {
   if (isCheckingOut) {
     return (
       <div className="container mx-auto px-6 py-12 pb-32 max-w-2xl">
-        <button 
+        <button
           onClick={() => setIsCheckingOut(false)}
           className="flex items-center space-x-2 text-slate-400 hover:text-white mb-8 transition-colors"
         >
@@ -119,44 +120,44 @@ export default function CartPage() {
         <form onSubmit={processOrder} className="glass rounded-3xl p-8 space-y-6">
           <div>
             <label className="block text-sm font-bold text-slate-300 mb-2">Full Name</label>
-            <input 
-              required 
-              type="text" 
+            <input
+              required
+              type="text"
               value={formData.name}
-              onChange={e => setFormData({...formData, name: e.target.value})}
+              onChange={e => setFormData({ ...formData, name: e.target.value })}
               className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary-500 transition-colors"
               placeholder="John Doe"
             />
           </div>
           <div>
             <label className="block text-sm font-bold text-slate-300 mb-2">Email Address</label>
-            <input 
-              required 
-              type="email" 
+            <input
+              required
+              type="email"
               value={formData.email}
-              onChange={e => setFormData({...formData, email: e.target.value})}
+              onChange={e => setFormData({ ...formData, email: e.target.value })}
               className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary-500 transition-colors"
               placeholder="john@example.com"
             />
           </div>
           <div>
             <label className="block text-sm font-bold text-slate-300 mb-2">Phone Number</label>
-            <input 
-              required 
-              type="tel" 
+            <input
+              required
+              type="tel"
               value={formData.phone}
-              onChange={e => setFormData({...formData, phone: e.target.value})}
+              onChange={e => setFormData({ ...formData, phone: e.target.value })}
               className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary-500 transition-colors"
               placeholder="+1 (555) 123-4567"
             />
           </div>
           <div>
             <label className="block text-sm font-bold text-slate-300 mb-2">Delivery Address</label>
-            <textarea 
-              required 
+            <textarea
+              required
               rows={3}
               value={formData.address}
-              onChange={e => setFormData({...formData, address: e.target.value})}
+              onChange={e => setFormData({ ...formData, address: e.target.value })}
               className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary-500 transition-colors resize-none"
               placeholder="123 Premium Street, Tech City, TC 90210"
             />
@@ -169,7 +170,7 @@ export default function CartPage() {
             <span className="text-2xl font-black text-glow text-primary-400">${totalPrice().toFixed(2)}</span>
           </div>
 
-          <button 
+          <button
             type="submit"
             disabled={loading}
             className="w-full py-4 bg-gradient-premium text-white font-bold rounded-2xl shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform flex items-center justify-center space-x-2 disabled:opacity-50 disabled:scale-100"
@@ -196,11 +197,11 @@ export default function CartPage() {
               <div className="relative w-32 h-32 rounded-2xl overflow-hidden flex-shrink-0">
                 <Image src={item.image} alt={item.name} fill className="object-cover" />
               </div>
-              
+
               <div className="flex-grow text-center sm:text-left">
                 <h3 className="text-xl font-bold text-white mb-1">{item.name}</h3>
                 <p className="text-primary-400 font-bold text-lg mb-4">${item.price.toFixed(2)}</p>
-                
+
                 <div className="flex items-center justify-center sm:justify-start space-x-4">
                   <div className="flex items-center glass rounded-xl px-2 py-1">
                     <button
@@ -217,7 +218,7 @@ export default function CartPage() {
                       <Plus size={16} />
                     </button>
                   </div>
-                  
+
                   <button
                     onClick={() => removeItem(item.id)}
                     className="p-2 text-slate-500 hover:text-red-500 transition-colors"
@@ -239,7 +240,7 @@ export default function CartPage() {
         <div className="lg:col-span-1">
           <div className="glass rounded-3xl p-8 sticky top-32">
             <h2 className="text-2xl font-bold text-white mb-8">Order Summary</h2>
-            
+
             <div className="space-y-4 mb-8">
               <div className="flex justify-between text-slate-400">
                 <span>Subtotal</span>
@@ -256,7 +257,7 @@ export default function CartPage() {
               </div>
             </div>
 
-            <button 
+            <button
               onClick={handleCheckoutClick}
               disabled={loading}
               className="w-full py-4 bg-gradient-premium text-white font-bold rounded-2xl shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform flex items-center justify-center space-x-2 disabled:opacity-50 disabled:scale-100"
@@ -264,7 +265,7 @@ export default function CartPage() {
               <span>Checkout Now</span>
               <ArrowRight size={20} />
             </button>
-            
+
             <Link
               href="/shop"
               className="w-full mt-4 py-4 text-center text-slate-400 hover:text-white font-medium transition-colors block"

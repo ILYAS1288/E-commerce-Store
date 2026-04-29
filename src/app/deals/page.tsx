@@ -18,6 +18,7 @@ export default function DealsPage() {
       stock: "Low Stock",
       hot: true
     },
+
     {
       id: 2,
       title: "SonicWave Wireless ANC",
@@ -61,7 +62,7 @@ export default function DealsPage() {
 
       {/* Hero Header */}
       <div className="relative pt-32 pb-16 text-center z-10 px-6 container mx-auto">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -71,14 +72,14 @@ export default function DealsPage() {
             <Flame size={16} className="fill-accent-400 text-accent-400 animate-pulse" />
             <span>Black Friday Early Access</span>
           </div>
-          
+
           <h1 className="text-6xl md:text-8xl font-black text-white tracking-tight drop-shadow-2xl mb-6">
             Cyber
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-400 via-primary-300 to-secondary-400 px-4">
               Deals
             </span>
           </h1>
-          
+
           <p className="text-xl text-slate-300 max-w-2xl font-light leading-relaxed mb-10">
             Unbeatable prices on the most premium setups. Once the timer hits zero, these offers are gone forever. Lock in your upgrades now.
           </p>
@@ -106,7 +107,7 @@ export default function DealsPage() {
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-8">
           {deals.map((deal, index) => (
-            <motion.div 
+            <motion.div
               key={deal.id}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
@@ -116,13 +117,13 @@ export default function DealsPage() {
               {/* Image Section */}
               <div className="relative w-full lg:w-1/2 h-[300px] lg:h-[350px] rounded-3xl overflow-hidden glass shadow-2xl skew-x-0 group-hover:scale-[1.02] transition-transform duration-500">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
-                <Image 
-                  src={deal.image} 
-                  alt={deal.title} 
-                  fill 
+                <Image
+                  src={deal.image}
+                  alt={deal.title}
+                  fill
                   className="object-cover"
                 />
-                
+
                 <div className="absolute top-4 left-4 z-20 flex flex-col gap-2">
                   <div className="px-3 py-1 bg-accent-500 text-white font-bold text-sm rounded-full tracking-wider shadow-[0_0_15px_rgba(244,63,94,0.5)]">
                     {deal.discount}
@@ -152,11 +153,11 @@ export default function DealsPage() {
                 </div>
 
                 <span className="hidden lg:block text-accent-400 text-xs font-bold uppercase tracking-widest mb-3">{deal.stock}</span>
-                
+
                 <h2 className="text-3xl font-black text-white mb-4 leading-tight group-hover:text-primary-300 transition-colors">
                   {deal.title}
                 </h2>
-                
+
                 <div className="flex items-end space-x-4 mb-8">
                   <span className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">
                     ${deal.salePrice}
@@ -171,7 +172,7 @@ export default function DealsPage() {
                     <ShoppingCart size={20} />
                     <span>Claim Deal</span>
                   </button>
-                  <Link 
+                  <Link
                     href="/shop"
                     className="px-6 py-4 glass border border-white/10 rounded-2xl text-white font-bold flex items-center justify-center hover:bg-white/10 transition-colors"
                   >
