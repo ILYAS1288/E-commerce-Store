@@ -78,6 +78,7 @@ export const Hero = () => {
           </motion.div>
 
           {/* Right Column: Floating Image Composition */}
+          
           <div className="relative h-[600px] hidden lg:block perspective-1000">
             <motion.div
               initial={{ opacity: 0, scale: 0.8, rotateY: 20 }}

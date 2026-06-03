@@ -183,6 +183,7 @@ export default function CartPage() {
     );
   }
 
+  
   return (
     <div className="container mx-auto px-6 py-12 pb-32">
       <h1 className="text-4xl font-black text-white mb-12 flex items-center space-x-4">
