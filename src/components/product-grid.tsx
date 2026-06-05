@@ -30,6 +30,7 @@ export const ProductGrid = ({ category = "All Categories", sort = "Sort: Feature
 
   if (loading) {
     return (
+      // Simple skeleton loaders for better UX during data fetching
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {[...Array(4)].map((_, i) => (
           <div key={i} className="glass h-[400px] rounded-3xl animate-pulse" />
