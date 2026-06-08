@@ -84,6 +84,7 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
+      // Empty cart state with a call-to-action to explore products
       <div className="container mx-auto px-6 py-20 text-center">
         <div className="w-24 h-24 glass rounded-3xl flex items-center justify-center mx-auto mb-8 text-slate-600">
           <ShoppingBag size={48} />
@@ -102,7 +103,7 @@ export default function CartPage() {
       </div>
     );
   }
-
+// Checkout form state
   if (isCheckingOut) {
     return (
       <div className="container mx-auto px-6 py-12 pb-32 max-w-2xl">
@@ -129,6 +130,7 @@ export default function CartPage() {
               placeholder="John Doe"
             />
           </div>
+          {/* Email Address */}
           <div>
             <label className="block text-sm font-bold text-slate-300 mb-2">Email Address</label>
             <input
@@ -140,6 +142,7 @@ export default function CartPage() {
               placeholder="john@example.com"
             />
           </div>
+          {/* Phone Number */}
           <div>
             <label className="block text-sm font-bold text-slate-300 mb-2">Phone Number</label>
             <input
@@ -151,6 +154,7 @@ export default function CartPage() {
               placeholder="+1 (555) 123-4567"
             />
           </div>
+            {/* Delivery Address */}
           <div>
             <label className="block text-sm font-bold text-slate-300 mb-2">Delivery Address</label>
             <textarea
@@ -162,7 +166,7 @@ export default function CartPage() {
               placeholder="123 Premium Street, Tech City, TC 90210"
             />
           </div>
-
+ 
           <div className="h-px bg-white/10 my-4" />
 
           <div className="flex justify-between items-center mb-6">
@@ -185,6 +189,7 @@ export default function CartPage() {
 
   
   return (
+    // Main cart page with list of items and order summary
     <div className="container mx-auto px-6 py-12 pb-32">
       <h1 className="text-4xl font-black text-white mb-12 flex items-center space-x-4">
         <span>Shopping Cart</span>
@@ -237,6 +242,7 @@ export default function CartPage() {
             </div>
           ))}
         </div>
+        // Order summary sidebar
 
         <div className="lg:col-span-1">
           <div className="glass rounded-3xl p-8 sticky top-32">

@@ -21,6 +21,7 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+
   return (
     
     <nav
@@ -37,7 +38,7 @@ export const Navbar = () => {
             Shop<span className="text-primary-400">Ease</span>
           </span>
         </Link>
-
+{/* ronter  */}
         <div className="hidden md:flex items-center space-x-8">
           <Link href="/" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Home</Link>
           <Link href="/shop" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Shop</Link>

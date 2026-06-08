@@ -17,6 +17,7 @@ interface AuthContextValue {
   logout: () => void;
 }
 
+
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
