@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/components/auth-provider';
 
 const publicRoutes = ['/login'];
+// AuthGuard component to protect routes based on authentication status
 
 export function AuthGuard({ children }: { children: React.ReactNode }) {
   const { auth, initialized } = useAuth();

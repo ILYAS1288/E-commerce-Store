@@ -18,7 +18,7 @@ export default function CartPage() {
     phone: '',
     address: ''
   });
-
+// Ensure cart state is loaded on client side
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -63,6 +63,7 @@ export default function CartPage() {
   };
   if (success) {
     return (
+      // Order confirmation page with a thank you message and a call-to-action to continue shopping
       <div className="container mx-auto px-6 py-20 text-center min-h-screen flex flex-col items-center justify-center">
         <div className="w-24 h-24 bg-green-500/10 border border-green-500/30 rounded-full flex items-center justify-center mx-auto mb-8 text-green-400">
           <CheckCircle2 size={48} />
@@ -173,7 +174,7 @@ export default function CartPage() {
             <span className="text-xl font-bold text-white">Total Amount</span>
             <span className="text-2xl font-black text-glow text-primary-400">${totalPrice().toFixed(2)}</span>
           </div>
-
+ // Finalize order button with loading state
           <button
             type="submit"
             disabled={loading}
