@@ -174,7 +174,7 @@ export default function CartPage() {
             <span className="text-xl font-bold text-white">Total Amount</span>
             <span className="text-2xl font-black text-glow text-primary-400">${totalPrice().toFixed(2)}</span>
           </div>
- // Finalize order button with loading state
+          {/* Finalize order button with loading state */}
           <button
             type="submit"
             disabled={loading}
@@ -243,8 +243,7 @@ export default function CartPage() {
             </div>
           ))}
         </div>
-        // Order summary sidebar
-
+         {/* Order summary sidebar */}
         <div className="lg:col-span-1">
           <div className="glass rounded-3xl p-8 sticky top-32">
             <h2 className="text-2xl font-bold text-white mb-8">Order Summary</h2>

@@ -46,6 +46,7 @@ export default function RegisterPage() {
   };
 
   return (
+    // Page container with responsive grid layout
     <div className="container mx-auto px-6 py-24">
       <div className="max-w-5xl mx-auto grid gap-16 lg:grid-cols-[1.2fr_1fr] items-center">
         <div className="space-y-6">
