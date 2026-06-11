@@ -46,7 +46,7 @@ export default function AboutPage() {
               <Globe size={16} className="text-secondary-400" />
               <span>Our Story</span>
             </div>
-            
+            {/* the hero section */}
             <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.1] mb-8 tracking-tight">
               Redefining <br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 via-secondary-300 to-primary-500 drop-shadow-xl">
@@ -70,6 +70,7 @@ export default function AboutPage() {
               </div>
             </div>
           </motion.div>
+          {/* Image Section */}
 
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}

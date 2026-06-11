@@ -69,7 +69,7 @@ export default function Home() {
             <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">Why Choose Us</h2>
             <p className="text-xl text-slate-400 font-light">We redefine standard e-commerce to bring you an unparalleled shopping experience.</p>
           </div>
-          // Benefits grid with hover effects and icons
+          {/* Benefits grid with hover effects and icons */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="p-8 rounded-3xl glass border border-white/10 hover:border-primary-500/50 transition-colors group">
               <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-primary-500/30">
@@ -78,7 +78,7 @@ export default function Home() {
               <h3 className="text-xl font-bold text-white mb-4">Hyper-Fast Delivery</h3>
               <p className="text-slate-400 leading-relaxed">Next-day shipping on all premium items across the continental US, powered by our advanced logistics network.</p>
             </div>
-            // Repeat for other benefits with different icons and colors
+            {/* Repeat for other benefits with different icons and colors */}
             <div className="p-8 rounded-3xl glass border border-white/10 hover:border-secondary-500/50 transition-colors group">
               <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-secondary-500 to-secondary-700 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-secondary-500/30">
                 <Shield size={32} />
@@ -86,7 +86,7 @@ export default function Home() {
               <h3 className="text-xl font-bold text-white mb-4">Absolute Security</h3>
               <p className="text-slate-400 leading-relaxed">Military-grade AES-256 encryption secures your transactions. Your data is uncompromised.</p>
             </div>
-            // Repeat for other benefits with different icons and colors
+            {/* Repeat for other benefits with different icons and colors */}
             <div className="p-8 rounded-3xl glass border border-white/10 hover:border-accent-500/50 transition-colors group">
               <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent-500 to-accent-700 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-accent-500/30">
                 <Award size={32} />
@@ -94,7 +94,7 @@ export default function Home() {
               <h3 className="text-xl font-bold text-white mb-4">Elite Warranties</h3>
               <p className="text-slate-400 leading-relaxed">Every product comes with our signature 2-year comprehensive coverage against any defects.</p>
             </div>
-// Repeat for other benefits with different icons and colors
+            {/* Repeat for other benefits with different icons and colors */}
             <div className="p-8 rounded-3xl glass border border-white/10 hover:border-primary-400/50 transition-colors group">
               <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-400 to-secondary-400 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-primary-400/30">
                 <Headphones size={32} />
