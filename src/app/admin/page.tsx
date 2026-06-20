@@ -17,6 +17,15 @@ export default function AdminPage() {
   const { auth, initialized, logout } = useAuth();
   const router = useRouter();
   const [ready, setReady] = useState(false);
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState('');
+  const [image, setImage] = useState('');
+  const [category, setCategory] = useState('');
+  const [countInStock, setCountInStock] = useState('0');
+  const [formStatus, setFormStatus] = useState('');
+  const [formError, setFormError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (!initialized) return;
@@ -30,6 +39,54 @@ export default function AdminPage() {
     }
     setReady(true);
   }, [auth, initialized, router]);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setFormError('');
+    setFormStatus('');
+
+    if (!name || !description || !price || !image || !category) {
+      setFormError('Please fill in all required fields.');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/products', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          description,
+          price: Number(price),
+          image,
+          category,
+          countInStock: Number(countInStock),
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        setFormError(result.error || 'Unable to add product.');
+        return;
+      }
+
+      setFormStatus('Product added successfully.');
+      setName('');
+      setDescription('');
+      setPrice('');
+      setImage('');
+      setCategory('');
+      setCountInStock('0');
+    } catch (error) {
+      console.error('Product submit error:', error);
+      setFormError('Failed to add product. Try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   if (!ready) {
     return (
@@ -75,6 +132,104 @@ export default function AdminPage() {
           );
         })}
       </div>
+
+      <section className="glass rounded-[2rem] border border-white/10 p-8 shadow-2xl shadow-black/20 mb-12">
+        <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h2 className="text-2xl font-semibold text-white">Add a new product</h2>
+            <p className="mt-2 text-sm text-slate-400">Enter product details below to add inventory directly from the admin dashboard.</p>
+          </div>
+          <span className="rounded-full bg-slate-950/50 px-4 py-2 text-sm text-slate-300">Admin only</span>
+        </div>
+
+        <form className="grid gap-6 lg:grid-cols-2" onSubmit={handleSubmit}>
+          <div className="space-y-4">
+            <label className="block text-sm font-medium text-slate-300">
+              Product name
+              <input
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+                className="mt-2 w-full rounded-3xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition focus:border-primary-400"
+                placeholder="Wireless headphones"
+                required
+              />
+            </label>
+
+            <label className="block text-sm font-medium text-slate-300">
+              Description
+              <textarea
+                value={description}
+                onChange={(event) => setDescription(event.target.value)}
+                className="mt-2 w-full min-h-[140px] rounded-3xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition focus:border-primary-400"
+                placeholder="A premium wireless headset with noise cancellation and 30h battery life."
+                required
+              />
+            </label>
+          </div>
+
+          <div className="space-y-4">
+            <label className="block text-sm font-medium text-slate-300">
+              Price ($)
+              <input
+                type="number"
+                step="0.01"
+                min="0"
+                value={price}
+                onChange={(event) => setPrice(event.target.value)}
+                className="mt-2 w-full rounded-3xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition focus:border-primary-400"
+                placeholder="199.99"
+                required
+              />
+            </label>
+
+            <label className="block text-sm font-medium text-slate-300">
+              Image URL
+              <input
+                value={image}
+                onChange={(event) => setImage(event.target.value)}
+                className="mt-2 w-full rounded-3xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition focus:border-primary-400"
+                placeholder="https://example.com/product.jpg"
+                required
+              />
+            </label>
+
+            <label className="block text-sm font-medium text-slate-300">
+              Category
+              <input
+                value={category}
+                onChange={(event) => setCategory(event.target.value)}
+                className="mt-2 w-full rounded-3xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition focus:border-primary-400"
+                placeholder="Audio"
+                required
+              />
+            </label>
+
+            <label className="block text-sm font-medium text-slate-300">
+              Stock quantity
+              <input
+                type="number"
+                min="0"
+                value={countInStock}
+                onChange={(event) => setCountInStock(event.target.value)}
+                className="mt-2 w-full rounded-3xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition focus:border-primary-400"
+                required
+              />
+            </label>
+
+            <div className="flex flex-col gap-3 pt-2">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="inline-flex items-center justify-center rounded-full bg-primary-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-primary-400 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {isSubmitting ? 'Adding product...' : 'Add product'}
+              </button>
+              {formStatus ? <p className="text-sm text-emerald-400">{formStatus}</p> : null}
+              {formError ? <p className="text-sm text-rose-400">{formError}</p> : null}
+            </div>
+          </div>
+        </form>
+      </section>
 
       <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
         <section className="glass rounded-[2rem] border border-white/10 p-8 shadow-2xl shadow-black/20">

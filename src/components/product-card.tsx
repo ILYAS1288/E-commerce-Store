@@ -27,8 +27,18 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       className="group glass rounded-3xl overflow-hidden hover:border-primary/50 transition-all flex flex-col"
     >
       <div className="relative aspect-square overflow-hidden">
+        {/**
+          * Use a fallback for invalid or missing image URLs.
+          * Next.js Image throws on invalid external URLs.
+          */}
         <Image
-          src={product.image}
+          src={
+            product.image && product.image.trim() && /^(https?:\/\/)/i.test(product.image)
+              ? product.image
+              : product.image && product.image.trim().startsWith('/')
+              ? product.image.trim()
+              : '/image/gaming.jpg'
+          }
           alt={product.name}
           fill
           className="object-cover group-hover:scale-110 transition-transform duration-500"
