@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter, Link } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { UserPlus, Eye, EyeOff, ArrowLeft } from 'lucide-react';
 import { useAuth } from '@/components/auth-provider';
 

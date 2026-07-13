@@ -6,6 +6,18 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
+const fallbackImage = '/image/gaming.jpg';
+
+const resolveCartImageSrc = (image?: string) => {
+  const value = image?.toString().trim();
+
+  if (!value) return fallbackImage;
+  if (/^(https?:\/\/)/i.test(value)) return value;
+  if (value.startsWith('/')) return value;
+
+  return fallbackImage;
+};
+
 export default function CartPage() {
   const { items, removeItem, updateQuantity, totalPrice, clearCart } = useCartStore();
   const [mounted, setMounted] = useState(false);
@@ -18,11 +30,10 @@ export default function CartPage() {
     phone: '',
     address: ''
   });
-  // Ensure cart state is loaded on client side
+
   useEffect(() => {
     setMounted(true);
   }, []);
-
 
   if (!mounted) return null;
 
@@ -48,11 +59,11 @@ export default function CartPage() {
         setIsCheckingOut(false);
         clearCart();
       } else {
-        alert("Failed to process order.");
+        alert('Failed to process order.');
       }
     } catch (error) {
       console.error(error);
-      alert("An error occurred during checkout.");
+      alert('An error occurred during checkout.');
     } finally {
       setLoading(false);
     }
@@ -61,9 +72,9 @@ export default function CartPage() {
   const handleCheckoutClick = () => {
     setIsCheckingOut(true);
   };
+
   if (success) {
     return (
-      // Order confirmation page with a thank you message and a call-to-action to continue shopping
       <div className="container mx-auto px-6 py-20 text-center min-h-screen flex flex-col items-center justify-center">
         <div className="w-24 h-24 bg-green-500/10 border border-green-500/30 rounded-full flex items-center justify-center mx-auto mb-8 text-green-400">
           <CheckCircle2 size={48} />
@@ -85,7 +96,6 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
-      // Empty cart state with a call-to-action to explore products
       <div className="container mx-auto px-6 py-20 text-center">
         <div className="w-24 h-24 glass rounded-3xl flex items-center justify-center mx-auto mb-8 text-slate-600">
           <ShoppingBag size={48} />
@@ -104,7 +114,7 @@ export default function CartPage() {
       </div>
     );
   }
-  // Checkout form state
+
   if (isCheckingOut) {
     return (
       <div className="container mx-auto px-6 py-12 pb-32 max-w-2xl">
@@ -126,43 +136,40 @@ export default function CartPage() {
               required
               type="text"
               value={formData.name}
-              onChange={e => setFormData({ ...formData, name: e.target.value })}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary-500 transition-colors"
               placeholder="John Doe"
             />
           </div>
-          {/* Email Address */}
           <div>
             <label className="block text-sm font-bold text-slate-300 mb-2">Email Address</label>
             <input
               required
               type="email"
               value={formData.email}
-              onChange={e => setFormData({ ...formData, email: e.target.value })}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary-500 transition-colors"
               placeholder="john@example.com"
             />
           </div>
-          {/* Phone Number */}
           <div>
             <label className="block text-sm font-bold text-slate-300 mb-2">Phone Number</label>
             <input
               required
               type="tel"
               value={formData.phone}
-              onChange={e => setFormData({ ...formData, phone: e.target.value })}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary-500 transition-colors"
               placeholder="+1 (555) 123-4567"
             />
           </div>
-          {/* Delivery Address */}
           <div>
             <label className="block text-sm font-bold text-slate-300 mb-2">Delivery Address</label>
             <textarea
               required
               rows={3}
               value={formData.address}
-              onChange={e => setFormData({ ...formData, address: e.target.value })}
+              onChange={(e) => setFormData({ ...formData, address: e.target.value })}
               className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary-500 transition-colors resize-none"
               placeholder="123 Premium Street, Tech City, TC 90210"
             />
@@ -174,7 +181,6 @@ export default function CartPage() {
             <span className="text-xl font-bold text-white">Total Amount</span>
             <span className="text-2xl font-black text-glow text-primary-400">${totalPrice().toFixed(2)}</span>
           </div>
-          {/* Finalize order button with loading state */}
           <button
             type="submit"
             disabled={loading}
@@ -188,10 +194,7 @@ export default function CartPage() {
     );
   }
 
-
   return (
-    
-    // Main cart page with list of items and order summary
     <div className="container mx-auto px-6 py-12 pb-32">
       <h1 className="text-4xl font-black text-white mb-12 flex items-center space-x-4">
         <span>Shopping Cart</span>
@@ -203,7 +206,7 @@ export default function CartPage() {
           {items.map((item) => (
             <div key={item.id} className="glass rounded-3xl p-6 flex flex-col sm:flex-row items-center space-y-6 sm:space-y-0 sm:space-x-6">
               <div className="relative w-32 h-32 rounded-2xl overflow-hidden flex-shrink-0">
-                <Image src={item.image} alt={item.name} fill className="object-cover" />
+                <Image src={resolveCartImageSrc(item.image)} alt={item.name} fill className="object-cover" />
               </div>
 
               <div className="flex-grow text-center sm:text-left">
@@ -244,7 +247,6 @@ export default function CartPage() {
             </div>
           ))}
         </div>
-        {/* Order summary sidebar */}
         <div className="lg:col-span-1">
           <div className="glass rounded-3xl p-8 sticky top-32">
             <h2 className="text-2xl font-bold text-white mb-8">Order Summary</h2>

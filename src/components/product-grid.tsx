@@ -6,9 +6,10 @@ import { ProductCard } from './product-card';
 interface ProductGridProps {
   category?: string;
   sort?: string;
+  search?: string;
 }
 
-export const ProductGrid = ({ category = "All Categories", sort = "Sort: Featured" }: ProductGridProps) => {
+export const ProductGrid = ({ category = "All Categories", sort = "Sort: Featured", search = "" }: ProductGridProps) => {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -30,7 +31,6 @@ export const ProductGrid = ({ category = "All Categories", sort = "Sort: Feature
 
   if (loading) {
     return (
-      // Simple skeleton loaders for better UX during data fetching
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {[...Array(4)].map((_, i) => (
           <div key={i} className="glass h-[400px] rounded-3xl animate-pulse" />
@@ -41,10 +41,22 @@ export const ProductGrid = ({ category = "All Categories", sort = "Sort: Feature
 
   let filteredProducts = [...products];
 
+  // Filter by search query
+  if (search && search.trim()) {
+    const searchLower = search.toLowerCase();
+    filteredProducts = filteredProducts.filter(p =>
+      p.name.toLowerCase().includes(searchLower) ||
+      p.category.toLowerCase().includes(searchLower) ||
+      (p.description && p.description.toLowerCase().includes(searchLower))
+    );
+  }
+
+  // Filter by category
   if (category && category !== "All Categories") {
     filteredProducts = filteredProducts.filter(p => p.category === category);
   }
 
+  // Sort products
   if (sort === "Price: Low to High") {
     filteredProducts.sort((a, b) => a.price - b.price);
   } else if (sort === "Price: High to Low") {
@@ -56,7 +68,9 @@ export const ProductGrid = ({ category = "All Categories", sort = "Sort: Feature
   if (filteredProducts.length === 0) {
     return (
       <div className="text-center py-20">
-        <p className="text-slate-400">No products found matching your filters.</p>
+        <p className="text-slate-400">
+          {search ? `No products found matching "${search}".` : 'No products found matching your filters.'}
+        </p>
       </div>
     );
   }

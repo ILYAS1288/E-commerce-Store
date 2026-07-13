@@ -1,6 +1,18 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+const fallbackImage = '/image/gaming.jpg';
+
+const normalizeImageSrc = (image?: string) => {
+  const value = image?.toString().trim();
+
+  if (!value) return fallbackImage;
+  if (/^(https?:\/\/)/i.test(value)) return value;
+  if (value.startsWith('/')) return value;
+
+  return fallbackImage;
+};
+
 export interface CartItem {
   id: string;
   name: string;
@@ -30,11 +42,11 @@ export const useCartStore = create<CartState>()(
         if (existingItem) {
           set({
             items: currentItems.map((i) =>
-              i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
+              i.id === item.id ? { ...i, quantity: i.quantity + 1, image: normalizeImageSrc(i.image) } : i
             ),
           });
         } else {
-          set({ items: [...currentItems, { ...item, quantity: 1 }] });
+          set({ items: [...currentItems, { ...item, image: normalizeImageSrc(item.image), quantity: 1 }] });
         }
       },
       removeItem: (id) => {
@@ -43,7 +55,7 @@ export const useCartStore = create<CartState>()(
       updateQuantity: (id, quantity) => {
         set({
           items: get().items.map((i) =>
-            i.id === id ? { ...i, quantity: Math.max(1, quantity) } : i
+            i.id === id ? { ...i, quantity: Math.max(1, quantity), image: normalizeImageSrc(i.image) } : i
           ),
         });
       },
@@ -53,6 +65,22 @@ export const useCartStore = create<CartState>()(
     }),
     {
       name: 'shopease-cart',
+      merge: (persistedState, currentState) => {
+        if (!persistedState || typeof persistedState !== 'object') {
+          return currentState;
+        }
+
+        const state = persistedState as Partial<CartState> & { items?: CartItem[] };
+
+        return {
+          ...currentState,
+          ...state,
+          items: (state.items ?? []).map((item) => ({
+            ...item,
+            image: normalizeImageSrc(item.image),
+          })),
+        };
+      },
     }
   )
 );
