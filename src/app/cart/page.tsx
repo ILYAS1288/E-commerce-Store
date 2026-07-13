@@ -18,7 +18,7 @@ export default function CartPage() {
     phone: '',
     address: ''
   });
-// Ensure cart state is loaded on client side
+  // Ensure cart state is loaded on client side
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -104,7 +104,7 @@ export default function CartPage() {
       </div>
     );
   }
-// Checkout form state
+  // Checkout form state
   if (isCheckingOut) {
     return (
       <div className="container mx-auto px-6 py-12 pb-32 max-w-2xl">
@@ -155,7 +155,7 @@ export default function CartPage() {
               placeholder="+1 (555) 123-4567"
             />
           </div>
-            {/* Delivery Address */}
+          {/* Delivery Address */}
           <div>
             <label className="block text-sm font-bold text-slate-300 mb-2">Delivery Address</label>
             <textarea
@@ -167,7 +167,7 @@ export default function CartPage() {
               placeholder="123 Premium Street, Tech City, TC 90210"
             />
           </div>
- 
+
           <div className="h-px bg-white/10 my-4" />
 
           <div className="flex justify-between items-center mb-6">
@@ -188,8 +188,9 @@ export default function CartPage() {
     );
   }
 
-  
+
   return (
+    
     // Main cart page with list of items and order summary
     <div className="container mx-auto px-6 py-12 pb-32">
       <h1 className="text-4xl font-black text-white mb-12 flex items-center space-x-4">
@@ -243,7 +244,7 @@ export default function CartPage() {
             </div>
           ))}
         </div>
-         {/* Order summary sidebar */}
+        {/* Order summary sidebar */}
         <div className="lg:col-span-1">
           <div className="glass rounded-3xl p-8 sticky top-32">
             <h2 className="text-2xl font-bold text-white mb-8">Order Summary</h2>

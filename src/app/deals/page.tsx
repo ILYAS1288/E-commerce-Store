@@ -143,6 +143,7 @@ export default function DealsPage() {
               </div>
 
               {/* Content Section */}
+              
               <div className="w-full lg:w-1/2 flex flex-col justify-center h-full">
                 <div className="flex items-center justify-between mb-4 lg:hidden">
                   <div className="flex items-center space-x-2 bg-black/50 backdrop-blur-md rounded-full px-3 py-1 border border-white/10">
