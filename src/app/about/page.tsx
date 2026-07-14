@@ -44,29 +44,29 @@ export default function AboutPage() {
           >
             <div className="inline-flex items-center space-x-2 py-2 px-4 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm font-bold tracking-wider uppercase mb-8 backdrop-blur-md">
               <Globe size={16} className="text-secondary-400" />
-              <span>Our Story</span>
+              <span>Built for the Bold</span>
             </div>
             {/* the hero section */}
             <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.1] mb-8 tracking-tight">
-              Redefining <br/>
+              Powering <br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 via-secondary-300 to-primary-500 drop-shadow-xl">
-                E-Commerce
+                Elite Experiences
               </span>
             </h1>
             
             <p className="text-xl text-slate-400 leading-relaxed font-light mb-8">
-              Born from a frustration with mediocre marketplaces, ShopEase was founded in 2026 to create an uncompromising standard for premium gear selection. We eliminate the noise so you only see the absolute best.
+              ShopEase was built to cut through the noise and deliver premium technology with conviction. We handpick products that perform at the highest level and present them with clarity, speed, and confidence.
             </p>
 
             <div className="flex items-center space-x-8">
               <div className="flex flex-col">
-                <span className="text-4xl font-black text-white">50+</span>
-                <span className="text-primary-400 uppercase tracking-widest text-xs font-bold mt-1">Premium Brands</span>
+                <span className="text-4xl font-black text-white">100+</span>
+                <span className="text-primary-400 uppercase tracking-widest text-xs font-bold mt-1">Curated Brands</span>
               </div>
               <div className="w-[1px] h-12 bg-white/10" />
               <div className="flex flex-col">
-                <span className="text-4xl font-black text-white">2M+</span>
-                <span className="text-secondary-400 uppercase tracking-widest text-xs font-bold mt-1">Orders Shipped</span>
+                <span className="text-4xl font-black text-white">4M+</span>
+                <span className="text-secondary-400 uppercase tracking-widest text-xs font-bold mt-1">Products Delivered</span>
               </div>
             </div>
           </motion.div>
@@ -88,8 +88,8 @@ export default function AboutPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-10 left-10 right-10">
-                <h3 className="text-3xl font-black text-white mb-2">The Nexus</h3>
-                <p className="text-slate-300">Our global staging ground in San Francisco.</p>
+                <h3 className="text-3xl font-black text-white mb-2">The Command Center</h3>
+                <p className="text-slate-300">A global hub where strategy, design, and performance come together.</p>
               </div>
             </div>
           </motion.div>
@@ -100,8 +100,8 @@ export default function AboutPage() {
       <section className="py-24 relative z-10 border-y border-white/5 bg-black/20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">Core Directives</h2>
-            <p className="text-xl font-light text-slate-400">The unshakeable pillars of our operation.</p>
+            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">The Principles Behind the Brand</h2>
+            <p className="text-xl font-light text-slate-400">The standards that define every product, every experience, and every decision.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -135,12 +135,12 @@ export default function AboutPage() {
           <div className="flex flex-col md:flex-row items-center justify-between mb-16">
             <div>
               <span className="text-accent-400 font-bold uppercase tracking-widest text-xs mb-3 block flex items-center space-x-2">
-                <Sparkles size={14} /> <span>Leadership</span>
+                <Sparkles size={14} /> <span>The Team Behind the Standard</span>
               </span>
-              <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">Meet The Architects</h2>
+              <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">Meet the Team Behind the Standard</h2>
             </div>
             <p className="mt-6 md:mt-0 max-w-sm text-slate-400 font-light">
-              We assembled industry veterans who actually use the products they sell.
+              We assembled builders, creators, and operators who live the products they champion.
             </p>
           </div>
 
@@ -195,10 +195,10 @@ export default function AboutPage() {
               <div className="w-16 h-16 rounded-full bg-primary-500/20 flex items-center justify-center mb-6 text-primary-400 group-hover:scale-110 transition-transform">
                 <Zap size={24} />
               </div>
-              <h4 className="text-2xl font-bold text-white mb-2">Join the Elite</h4>
-              <p className="text-slate-400 pb-6">We're always looking for top-tier talent.</p>
+              <h4 className="text-2xl font-bold text-white mb-2">Join the Next Wave</h4>
+              <p className="text-slate-400 pb-6">We are always looking for people who want to shape the future of premium tech.</p>
               <button className="px-6 py-2 rounded-full border border-white/20 text-white font-bold hover:bg-white text-sm hover:text-black transition-colors">
-                View Careers
+                Explore Careers
               </button>
             </div>
           </div>

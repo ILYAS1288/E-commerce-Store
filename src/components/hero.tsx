@@ -28,18 +28,18 @@ export const Hero = () => {
               className="inline-flex items-center space-x-2 py-2 px-4 rounded-full bg-primary-500/10 border border-primary-500/30 text-primary-400 text-sm font-bold tracking-wider uppercase mb-8 backdrop-blur-md"
             >
               <Star size={16} className="fill-primary-400" />
-              <span>The #1 Premium Tech Store</span>
+              <span>Built for bold creators and elite setups</span>
             </motion.div>
             
             <h1 className="text-6xl lg:text-8xl font-black text-white leading-[1.1] mb-8 tracking-tight">
-              Unleash <br />
+              Own <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 via-secondary-300 to-accent-400 drop-shadow-lg">
-                Your Setup
+                Every Moment
               </span>
             </h1>
             
             <p className="text-xl lg:text-2xl text-slate-300 mb-10 leading-relaxed max-w-xl font-light">
-              Elevate your workspace with carefully curated premium gear. Unmatched quality, breathtaking design, and raw power.
+              Command a workspace that performs like a machine and looks like a masterpiece. Precision-engineered tech, relentless speed, and unforgettable design.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
@@ -48,7 +48,7 @@ export const Hero = () => {
                 className="w-full sm:w-auto px-10 py-5 bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-bold rounded-2xl shadow-2xl shadow-primary-500/30 hover:scale-105 hover:shadow-primary-500/50 transition-all duration-300 flex items-center justify-center space-x-3 group relative overflow-hidden"
               >
                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
-                <span className="relative text-lg">Shop The Collection</span>
+                <span className="relative text-lg">Claim Your Gear</span>
                 <ArrowRight size={24} className="relative group-hover:translate-x-1 transition-transform" />
               </Link>
               
@@ -56,7 +56,7 @@ export const Hero = () => {
                 href="#features"
                 className="w-full sm:w-auto px-10 py-5 glass text-white font-bold rounded-2xl hover:bg-white/10 transition-colors flex items-center justify-center space-x-3 group border border-white/10 hover:border-white/20"
               >
-                <span className="text-lg">Explore Features</span>
+                <span className="text-lg">Unlock the Lineup</span>
               </Link>
             </div>
             
@@ -64,15 +64,15 @@ export const Hero = () => {
             <div className="mt-12 flex items-center space-x-8 text-slate-400">
               <div className="flex items-center space-x-2">
                 <div className="w-12 h-12 rounded-full glass flex items-center justify-center border border-white/5">
-                  <span className="text-white font-bold">10k+</span>
+                  <span className="text-white font-bold">20k+</span>
                 </div>
-                <span className="text-sm font-medium">Happy<br/>Customers</span>
+                <span className="text-sm font-medium">Upgraded<br/>Setups</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-12 h-12 rounded-full glass flex items-center justify-center border border-white/5">
-                  <span className="text-white font-bold">4.9</span>
+                  <span className="text-white font-bold">4.9/5</span>
                 </div>
-                <span className="text-sm font-medium">Average<br/>Rating</span>
+                <span className="text-sm font-medium">Trusted by<br/>Pros</span>
               </div>
             </div>
           </motion.div>

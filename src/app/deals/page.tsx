@@ -4,8 +4,11 @@ import { motion } from 'framer-motion';
 import { Tag, Timer, Flame, ArrowRight, ShoppingCart } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useCartStore } from '@/store/cart-store';
 
 export default function DealsPage() {
+  const addItem = useCartStore((state) => state.addItem);
+
   const deals = [
     {
       id: 1,
@@ -15,7 +18,7 @@ export default function DealsPage() {
       discount: "28% OFF",
       image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&q=80&w=800",
       endsIn: "04:21:45",
-      stock: "Low Stock",
+      stock: "Act Fast",
       hot: true
     },
 
@@ -27,7 +30,7 @@ export default function DealsPage() {
       discount: "43% OFF",
       image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=800",
       endsIn: "12:44:10",
-      stock: "In Stock"
+      stock: "Ready to Launch"
     },
     {
       id: 3,
@@ -37,7 +40,7 @@ export default function DealsPage() {
       discount: "22% OFF",
       image: "/image/gaming.jpg",
       endsIn: "08:15:30",
-      stock: "Only 3 Left",
+      stock: "Almost Gone",
       hot: true
     },
     {
@@ -48,7 +51,7 @@ export default function DealsPage() {
       discount: "38% OFF",
       image: "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?auto=format&fit=crop&q=80&w=800",
       endsIn: "23:59:59",
-      stock: "In Stock"
+      stock: "Ready to Launch"
     }
   ];
 
@@ -70,18 +73,18 @@ export default function DealsPage() {
         >
           <div className="inline-flex items-center space-x-2 py-2 px-4 rounded-full bg-accent-500/10 border border-accent-500/30 text-accent-400 text-sm font-bold tracking-wider uppercase mb-8 backdrop-blur-md shadow-[0_0_20px_rgba(244,63,94,0.3)]">
             <Flame size={16} className="fill-accent-400 text-accent-400 animate-pulse" />
-            <span>Black Friday Early Access</span>
+            <span>Elite Flash Raid</span>
           </div>
 
           <h1 className="text-6xl md:text-8xl font-black text-white tracking-tight drop-shadow-2xl mb-6">
             Cyber
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-400 via-primary-300 to-secondary-400 px-4">
-              Deals
+              Strike
             </span>
           </h1>
 
           <p className="text-xl text-slate-300 max-w-2xl font-light leading-relaxed mb-10">
-            Unbeatable prices on the most premium setups. Once the timer hits zero, these offers are gone forever. Lock in your upgrades now.
+            Unbeatable power upgrades on a hard-coded countdown. When the timer hits zero, these elite offers vanish. Lock in your advantage before it disappears.
           </p>
 
           <div className="flex items-center space-x-4 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl px-8 py-4">
@@ -169,15 +172,16 @@ export default function DealsPage() {
                 </div>
 
                 <div className="mt-auto flex flex-col sm:flex-row gap-4">
-                  <button className="flex-1 px-6 py-4 bg-gradient-to-r from-accent-600 to-accent-800 hover:from-accent-500 hover:to-accent-700 text-white font-bold rounded-2xl shadow-[0_0_20px_rgba(244,63,94,0.3)] hover:shadow-[0_0_30px_rgba(244,63,94,0.5)] transition-all flex items-center justify-center space-x-2 group/btn">
+                  <button onClick={() => addItem({ id: String(deal.id), name: deal.title, price: deal.salePrice, image: deal.image, quantity: 1 })} className="flex-1 px-6 py-4 bg-gradient-to-r from-accent-600 to-accent-800 hover:from-accent-500 hover:to-accent-700 text-white font-bold rounded-2xl shadow-[0_0_20px_rgba(244,63,94,0.3)] hover:shadow-[0_0_30px_rgba(244,63,94,0.5)] transition-all flex items-center justify-center space-x-2 group/btn">
                     <ShoppingCart size={20} />
-                    <span>Claim Deal</span>
+                    <span>Secure Now</span>
                   </button>
                   <Link
                     href="/shop"
                     className="px-6 py-4 glass border border-white/10 rounded-2xl text-white font-bold flex items-center justify-center hover:bg-white/10 transition-colors"
                   >
                     <ArrowRight size={20} />
+                    <span className="ml-2">Browse Arsenal</span>
                   </Link>
                 </div>
               </div>
