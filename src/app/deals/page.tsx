@@ -5,9 +5,27 @@ import { Tag, Timer, Flame, ArrowRight, ShoppingCart } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCartStore } from '@/store/cart-store';
+import { useState, useEffect } from 'react';
 
 export default function DealsPage() {
   const addItem = useCartStore((state) => state.addItem);
+  const [products, setProducts] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch('/api/products')
+      .then((res) => res.json())
+      .then((data) => setProducts(data))
+      .catch((err) => console.error('Error fetching products on deals page:', err));
+  }, []);
+
+  const getProductDbId = (dealId: number, title: string) => {
+    if (!products || products.length === 0) {
+      return dealId.toString().padStart(24, '0');
+    }
+    const firstWord = title.split(' ')[0].toLowerCase();
+    const found = products.find((p) => p.name.toLowerCase().includes(firstWord));
+    return found ? found.id : dealId.toString().padStart(24, '0');
+  };
 
   const deals = [
     {
@@ -172,7 +190,7 @@ export default function DealsPage() {
                 </div>
 
                 <div className="mt-auto flex flex-col sm:flex-row gap-4">
-                  <button onClick={() => addItem({ id: String(deal.id), name: deal.title, price: deal.salePrice, image: deal.image, quantity: 1 })} className="flex-1 px-6 py-4 bg-gradient-to-r from-accent-600 to-accent-800 hover:from-accent-500 hover:to-accent-700 text-white font-bold rounded-2xl shadow-[0_0_20px_rgba(244,63,94,0.3)] hover:shadow-[0_0_30px_rgba(244,63,94,0.5)] transition-all flex items-center justify-center space-x-2 group/btn">
+                  <button onClick={() => addItem({ id: getProductDbId(deal.id, deal.title), name: deal.title, price: deal.salePrice, image: deal.image, quantity: 1 })} className="flex-1 px-6 py-4 bg-gradient-to-r from-accent-600 to-accent-800 hover:from-accent-500 hover:to-accent-700 text-white font-bold rounded-2xl shadow-[0_0_20px_rgba(244,63,94,0.3)] hover:shadow-[0_0_30px_rgba(244,63,94,0.5)] transition-all flex items-center justify-center space-x-2 group/btn">
                     <ShoppingCart size={20} />
                     <span>Secure Now</span>
                   </button>

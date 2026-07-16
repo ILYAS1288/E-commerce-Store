@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 import { AuthProvider } from "@/components/auth-provider";
 import { AuthGuard } from "@/components/auth-guard";
 
@@ -25,6 +26,7 @@ export default function RootLayout({
           <main className="min-h-screen pt-24">
             <AuthGuard>{children}</AuthGuard>
           </main>
+          <Footer />
         </AuthProvider>
       </body>
     </html>
