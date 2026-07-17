@@ -75,6 +75,7 @@ export default function CartPage() {
 
   if (success) {
     return (
+      // after successfull order redirect to shop page with success message 
       <div className="container mx-auto px-6 py-20 text-center min-h-screen flex flex-col items-center justify-center">
         <div className="w-24 h-24 bg-green-500/10 border border-green-500/30 rounded-full flex items-center justify-center mx-auto mb-8 text-green-400">
           <CheckCircle2 size={48} />
@@ -96,6 +97,7 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
+      // if cart is empty redirect to shop page with empty cart message 
       <div className="container mx-auto px-6 py-20 text-center">
         <div className="w-24 h-24 glass rounded-3xl flex items-center justify-center mx-auto mb-8 text-slate-600">
           <ShoppingBag size={48} />
@@ -117,6 +119,7 @@ export default function CartPage() {
 
   if (isCheckingOut) {
     return (
+      // checkout form with name, email, phone, address ,  and total amount of items and cart icon
       <div className="container mx-auto px-6 py-12 pb-32 max-w-2xl">
         <button
           onClick={() => setIsCheckingOut(false)}
