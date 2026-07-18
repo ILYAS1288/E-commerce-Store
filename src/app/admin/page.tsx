@@ -12,7 +12,7 @@ const stats = [
   { label: 'Open orders', value: '87', icon: Package, accent: 'from-accent-500 to-primary-500' },
   { label: 'Secure reports', value: '24', icon: ShieldCheck, accent: 'from-primary-400 to-primary-600' },
 ];
- 
+//  bg-gradient-to-b from-black/90 via-black/80 to-black/90 z-50 top-0 w-full sticky transition-all duration-300
 export default function AdminPage() {
   const { auth, initialized, logout } = useAuth();
   const router = useRouter();
@@ -97,7 +97,7 @@ export default function AdminPage() {
   }
 
   return (
-      
+    //   bg-gradient-to-b from-black/90 via-black/80 to-black/90 z-50 top-0 w-full sticky transition-all duration-300
     <div className="container mx-auto px-6 py-24">
       <div className="mb-14 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         <div>

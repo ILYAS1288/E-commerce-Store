@@ -15,6 +15,7 @@ export const SearchHeader = ({ category, sort, onCategoryChange, onSortChange }:
   const search = searchParams.get('search') || '';
 
   return (
+    //  bg-gradient-to-b from-black/90 via-black/80 to-black/90 z-50 top-0 w-full sticky transition-all duration-300
     <div className="relative border-b border-white/5 bg-black/40 backdrop-blur-xl pt-32 pb-12">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between space-y-8 md:space-y-0">
@@ -55,7 +56,7 @@ export const SearchHeader = ({ category, sort, onCategoryChange, onSortChange }:
                 <option className="bg-slate-900">Furniture</option>
               </select>
             </div>
-
+            {/*  the issue is here  */}
             <div className="relative w-full sm:w-auto group">
               <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
                 <SlidersHorizontal size={16} className="text-slate-400 group-hover:text-secondary-400 transition-colors" />
