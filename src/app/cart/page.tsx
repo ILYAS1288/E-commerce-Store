@@ -94,7 +94,7 @@ export default function CartPage() {
       </div>
     );
   }
-
+// throw error if items is empty and user tries to checkout
   if (items.length === 0) {
     return (
       // if cart is empty redirect to shop page with empty cart message 
